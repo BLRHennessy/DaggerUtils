@@ -1,12 +1,14 @@
 package by.makarevich.daggerutils
 
 import android.app.Application
-import by.makarevich.daggerutils.dagger.*
+import by.makarevich.daggerutils.dagger.application.AppComponent
+import by.makarevich.daggerutils.dagger.application.AppModule
+import by.makarevich.daggerutils.dagger.application.DaggerAppComponent
 
-class AppDaggerUtils : Application() {
+class DaggerUtilsApplication : Application(), App {
+    override fun getAppComponent(): AppComponent = appComponent
 
     private lateinit var appComponent: AppComponent
-    lateinit var presenterComponent: PresenterComponent
 
     override fun onCreate() {
         super.onCreate()
@@ -15,10 +17,5 @@ class AppDaggerUtils : Application() {
             .appModule(AppModule(this))
             .build()
         appComponent.inject(this)
-        presenterComponent = DaggerPresenterComponent
-            .builder()
-            .appComponent(appComponent)
-            .presenterModule(PresenterModule())
-            .build()
     }
 }

@@ -1,11 +1,11 @@
 package by.makarevich.daggerutils.ui
 
-import by.makarevich.daggerutils.Prefs
+import by.makarevich.daggerutils.PreferencesDU
 import by.makarevich.daggerutils.interfaces.IAttachablePresenter
 import by.makarevich.daggerutils.interfaces.IPresenter
 
 
-class PresenterLogin(private val prefs: Prefs) : IAttachablePresenter<IPresenter>() {
+class PresenterLogin(private val prefs: PreferencesDU) : IAttachablePresenter<IPresenter>() {
 
     var login: String? = null
         set(value) {
