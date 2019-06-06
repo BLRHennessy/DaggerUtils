@@ -1,4 +1,4 @@
-package by.makarevich.daggerutils.dagger.utils
+package by.makarevich.daggerutils.utils
 
 import android.content.Context
 import android.net.ConnectivityManager

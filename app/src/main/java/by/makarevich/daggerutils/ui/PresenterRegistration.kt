@@ -2,12 +2,13 @@ package by.makarevich.daggerutils.ui
 
 import by.makarevich.daggerutils.PreferencesDU
 import by.makarevich.daggerutils.interfaces.IAttachablePresenter
-import by.makarevich.daggerutils.interfaces.IPresenterLogin
+import by.makarevich.daggerutils.interfaces.IPresenter
+import by.makarevich.daggerutils.interfaces.IPresenterRegistration
 
 
-class PresenterLogin(private val prefs: PreferencesDU) : IAttachablePresenter<IPresenterLogin>() {
+class PresenterRegistration(private val prefs: PreferencesDU) : IAttachablePresenter<IPresenterRegistration>() {
 
-        var login: String? = null
+    var login: String? = null
         set(value) {
             field = value
             prefs.login = field
@@ -21,7 +22,9 @@ class PresenterLogin(private val prefs: PreferencesDU) : IAttachablePresenter<IP
         }
         get() = prefs.password
 
-    fun checkCredantials(login: String, password: String) {
-        if (login.equals(prefs.login) && password.equals(prefs.password)) callback?.login() else callback?.showDialog("Wrong credentials")
+    fun saveCredantials(login: String, password: String) {
+        this.login = login
+        this.password = password
+        callback?.register()
     }
 }

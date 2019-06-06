@@ -3,7 +3,7 @@ package by.makarevich.daggerutils.dagger.application
 import android.content.Context
 import by.makarevich.daggerutils.DaggerUtilsApplication
 import by.makarevich.daggerutils.PreferencesDU
-import by.makarevich.daggerutils.dagger.utils.CheckInternet
+import by.makarevich.daggerutils.utils.CheckInternet
 import dagger.Component
 import javax.inject.Singleton
 

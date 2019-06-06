@@ -1,7 +1,7 @@
 package by.makarevich.daggerutils.dagger.application
 
 import android.content.Context
-import by.makarevich.daggerutils.dagger.utils.CheckInternet
+import by.makarevich.daggerutils.utils.CheckInternet
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

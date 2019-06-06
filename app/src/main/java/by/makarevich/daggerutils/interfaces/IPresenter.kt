@@ -1,7 +1,7 @@
 package by.makarevich.daggerutils.interfaces
 
-interface IPresenter {
-    fun getText(): String
+interface IPresenter{
+    fun showDialog(text: String)
 }
 
 abstract class IAttachablePresenter<T> {

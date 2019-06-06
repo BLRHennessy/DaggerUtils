@@ -1,14 +1,12 @@
 package by.makarevich.daggerutils.dagger.activity
 
+import by.makarevich.daggerutils.dagger.GeneralActivityScope
 import by.makarevich.daggerutils.dagger.application.AppComponent
 import dagger.Component
-import javax.inject.Scope
 
-@Component(dependencies = [AppComponent::class])
-@ActivityScope
+@Component(dependencies = [AppComponent::class], modules = [DialogModule::class])
+@GeneralActivityScope
 interface ActivityComponent {
+    fun plusAuthActivitySubComponent(authActivityModule: AuthActivityModule): AuthActivityComponent
+    fun plusMainActivitySubComponent(mainActivityModule: MainActivityModule): MainActivityComponent
 }
-
-@Scope
-@Retention(AnnotationRetention.RUNTIME)
-annotation class ActivityScope

@@ -7,7 +7,7 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class AuthActivityModule {
+class MainActivityModule {
 
     @Provides
     @ActivityScope

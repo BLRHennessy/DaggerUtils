@@ -1,10 +1,10 @@
 package by.makarevich.daggerutils
 
 import android.content.SharedPreferences
-import by.makarevich.daggerutils.dagger.utils.Preferences
+import by.makarevich.daggerutils.utils.Preferences
 
-class PreferencesDU(preferences: SharedPreferences) {
-    private val preferences = Preferences(preferences)
+class PreferencesDU(sharedPreferences: SharedPreferences) {
+    private val preferences = Preferences(sharedPreferences)
 
     private val USER_KEY = "USER"
     private val PASSWORD_KEY = "PASSWORD"
@@ -14,6 +14,6 @@ class PreferencesDU(preferences: SharedPreferences) {
         set(value) = preferences.putString(USER_KEY, value)
 
     var password: String?
-        get() = preferences.getString(PASSWORD_KEY, "Ivan")
+        get() = preferences.getString(PASSWORD_KEY, "password")
         set(value) = preferences.putString(PASSWORD_KEY, value)
 }
