@@ -4,6 +4,7 @@ import android.app.Application
 import by.makarevich.daggerutils.dagger.application.AppComponent
 import by.makarevich.daggerutils.dagger.application.AppModule
 import by.makarevich.daggerutils.dagger.application.DaggerAppComponent
+import by.makarevich.daggerutils.interfaces.App
 
 class DaggerUtilsApplication : Application(), App {
     override fun getAppComponent(): AppComponent = appComponent

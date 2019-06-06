@@ -1,4 +1,4 @@
-package by.makarevich.daggerutils
+package by.makarevich.daggerutils.utils
 
 import android.content.SharedPreferences
 import by.makarevich.daggerutils.utils.Preferences

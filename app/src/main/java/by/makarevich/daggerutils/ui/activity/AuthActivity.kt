@@ -2,9 +2,8 @@ package by.makarevich.daggerutils.ui.activity
 
 import android.os.Bundle
 import by.makarevich.daggerutils.R
-import by.makarevich.daggerutils.dagger.activity.AuthActivityModule
-import by.makarevich.daggerutils.dagger.activity.DaggerActivityComponent
-import by.makarevich.daggerutils.dagger.activity.DialogModule
+import by.makarevich.daggerutils.dagger.activity.AuthActivityComponent
+import by.makarevich.daggerutils.dagger.activity.DaggerAuthActivityComponent
 import by.makarevich.daggerutils.interfaces.IPresenter
 import by.makarevich.daggerutils.ui.fragment.AbstractFragment
 import by.makarevich.daggerutils.ui.fragment.AuthFragment
@@ -21,10 +20,10 @@ class AuthActivity : BaseActivity(), IPresenter {
     @Inject
     lateinit var dialogManager: DialogManager
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        val activityComponent =DaggerActivityComponent.builder().appComponent(appComponent).dialogModule(DialogModule()).build()
-        val authActivityComponent =activityComponent.plusAuthActivitySubComponent(AuthActivityModule())
+    lateinit var authActivityComponent: AuthActivityComponent
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        authActivityComponent = DaggerAuthActivityComponent.builder().appComponent(appComponent).build()
         authActivityComponent.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -44,6 +43,6 @@ class AuthActivity : BaseActivity(), IPresenter {
     }
 
     override fun showDialog(text: String) {
-        dialogManager.showDialog(this,text)
+        dialogManager.showDialog(this, text)
     }
 }

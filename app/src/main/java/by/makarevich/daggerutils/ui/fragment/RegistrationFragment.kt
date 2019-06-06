@@ -7,12 +7,10 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
 import by.makarevich.daggerutils.R
-import by.makarevich.daggerutils.dagger.activity.AuthActivityModule
 import by.makarevich.daggerutils.dagger.fragment.RegistrationFragmentModule
 import by.makarevich.daggerutils.interfaces.IPresenterRegistration
 import by.makarevich.daggerutils.ui.PresenterRegistration
 import by.makarevich.daggerutils.ui.activity.AuthActivity
-import by.makarevich.daggerutils.ui.activity.BaseActivity
 import javax.inject.Inject
 
 class RegistrationFragment : AbstractFragment(), IPresenterRegistration {
@@ -24,12 +22,10 @@ class RegistrationFragment : AbstractFragment(), IPresenterRegistration {
     private var password: EditText? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
-        val authActivityComponent =
-            (context as BaseActivity).activityComponent?.plusAuthActivitySubComponent(AuthActivityModule())
-        val registrationFragmentComponent =
-            authActivityComponent?.plusRegistrationFragmentSubComponent(RegistrationFragmentModule())
-        registrationFragmentComponent?.inject(this)
+        (context as AuthActivity)
+            .authActivityComponent
+            .plusRegistrationFragmentSubComponent(RegistrationFragmentModule())
+            .inject(this)
         presenter.onAttachedToWindow(this)
         val v = inflater.inflate(R.layout.fragment_registration, container, false)
         login = v.findViewById(R.id.login)

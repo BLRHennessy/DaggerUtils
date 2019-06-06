@@ -1,4 +1,4 @@
-package by.makarevich.daggerutils
+package by.makarevich.daggerutils.interfaces
 
 import by.makarevich.daggerutils.dagger.application.AppComponent
 

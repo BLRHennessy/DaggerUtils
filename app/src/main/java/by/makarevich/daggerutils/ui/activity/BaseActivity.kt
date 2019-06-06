@@ -1,28 +1,15 @@
 package by.makarevich.daggerutils.ui.activity
 
 import android.app.Activity
-import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import android.view.inputmethod.InputMethodManager
-import by.makarevich.daggerutils.dagger.activity.ActivityComponent
-import by.makarevich.daggerutils.dagger.activity.DaggerActivityComponent
 import by.makarevich.daggerutils.dagger.application.AppComponent
+import by.makarevich.daggerutils.interfaces.App
 import by.makarevich.daggerutils.ui.fragment.AbstractFragment
 
 open class BaseActivity : AppCompatActivity() {
 
-    val appComponent: AppComponent by lazy { (application as by.makarevich.daggerutils.App).getAppComponent() }
-    var activityComponent: ActivityComponent? = null
-
-    override fun onStart() {
-        activityComponent = DaggerActivityComponent
-            .builder()
-            .appComponent(appComponent)
-            .build()
-        super.onStart()
-    }
-
-    protected fun getContext(): Context = this
+    val appComponent: AppComponent by lazy { (application as App).getAppComponent() }
 
     fun hideKeyboard() {
         val imm = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager

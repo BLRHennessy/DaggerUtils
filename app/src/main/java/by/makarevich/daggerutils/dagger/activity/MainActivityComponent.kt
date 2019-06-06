@@ -1,11 +1,12 @@
 package by.makarevich.daggerutils.dagger.activity
 
 import by.makarevich.daggerutils.dagger.ActivityScope
+import by.makarevich.daggerutils.dagger.application.AppComponent
 import by.makarevich.daggerutils.ui.activity.MainActivity
-import dagger.Subcomponent
+import dagger.Component
 
-@Subcomponent(modules = [MainActivityModule::class])
+@Component(dependencies = [AppComponent::class], modules = [DialogModule::class, MainActivityModule::class])
 @ActivityScope
-interface MainActivityComponent {
+interface MainActivityComponent{
     fun inject(target: MainActivity)
 }

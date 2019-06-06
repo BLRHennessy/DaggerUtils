@@ -7,17 +7,14 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
 import by.makarevich.daggerutils.R
-import by.makarevich.daggerutils.dagger.activity.AuthActivityModule
 import by.makarevich.daggerutils.dagger.fragment.AuthFragmentModule
 import by.makarevich.daggerutils.interfaces.IPresenterLogin
 import by.makarevich.daggerutils.ui.PresenterLogin
 import by.makarevich.daggerutils.ui.activity.AuthActivity
-import by.makarevich.daggerutils.ui.activity.BaseActivity
 import by.makarevich.daggerutils.ui.activity.MainActivity
 import javax.inject.Inject
 
-class AuthFragment : AbstractFragment(), IPresenterLogin {
-
+class AuthFragment : AbstractFragment(), IPresenterLogin, View.OnClickListener {
     @Inject
     lateinit var presenter: PresenterLogin
 
@@ -25,20 +22,15 @@ class AuthFragment : AbstractFragment(), IPresenterLogin {
     var password: EditText? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val authActivityComponent =
-            (context as BaseActivity).activityComponent?.plusAuthActivitySubComponent(AuthActivityModule())
+        val authActivityComponent = (context as AuthActivity).authActivityComponent
         val authFragmentComponent =
-            authActivityComponent?.plusAuthFragmentSubComponent(AuthFragmentModule())
-        authFragmentComponent?.inject(this)
+            authActivityComponent.plusAuthFragmentSubComponent(AuthFragmentModule())
+        authFragmentComponent.inject(this)
         val v = inflater.inflate(R.layout.fragment_auth, container, false)
         login = v.findViewById(R.id.login)
         password = v.findViewById(R.id.password)
-        v.findViewById<TextView>(R.id.registration).setOnClickListener {
-            (context as AuthActivity).showRegistrationFragment()
-        }
-        v.findViewById<TextView>(R.id.ok).setOnClickListener {
-            presenter.checkCredantials(login?.text.toString(), password?.text.toString())
-        }
+        v.findViewById<TextView>(R.id.registration).setOnClickListener(this)
+        v.findViewById<TextView>(R.id.ok).setOnClickListener(this)
         presenter.onAttachedToWindow(this)
         return v
     }
@@ -51,4 +43,17 @@ class AuthFragment : AbstractFragment(), IPresenterLogin {
     override fun login() {
         MainActivity.startActivity((context as AuthActivity))
     }
+
+    override fun onClick(view: View?) {
+        (context as AuthActivity).hideKeyboard()
+        when (view?.id) {
+            R.id.registration -> {
+                (context as AuthActivity).showRegistrationFragment()
+            }
+            R.id.ok -> {
+                presenter.checkCredantials(login?.text.toString(), password?.text.toString())
+            }
+        }
+    }
+
 }

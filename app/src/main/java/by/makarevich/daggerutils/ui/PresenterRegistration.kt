@@ -1,8 +1,7 @@
 package by.makarevich.daggerutils.ui
 
-import by.makarevich.daggerutils.PreferencesDU
+import by.makarevich.daggerutils.utils.PreferencesDU
 import by.makarevich.daggerutils.interfaces.IAttachablePresenter
-import by.makarevich.daggerutils.interfaces.IPresenter
 import by.makarevich.daggerutils.interfaces.IPresenterRegistration
 
 
