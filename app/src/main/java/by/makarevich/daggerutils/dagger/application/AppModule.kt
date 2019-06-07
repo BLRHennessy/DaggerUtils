@@ -7,12 +7,12 @@ import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
-@Module
+@Module//Класс предоставляющий зависимости
 class AppModule(private val application: Application) {
 
-    @Provides
-    @Singleton
-    fun provideContext(): Context = application
+    @Provides//Метод внутри @Module, предоставляющий зависимость
+    @Singleton//default Scope
+    fun provideContext(): Context = application// предоставление зависимости
 
     @Provides
     @Singleton

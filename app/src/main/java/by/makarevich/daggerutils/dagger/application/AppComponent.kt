@@ -8,13 +8,13 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(    modules = [
+@Component(    modules = [//Указание модулей, которые будут предоставлять зависимости
         AppModule::class,
         NetworkModule::class,
         PreferencesModule::class])
 interface AppComponent {
-    fun prefs(): PreferencesDU
+    fun prefs(): PreferencesDU//Предоставление зависимости для dependency компонентов
     fun context(): Context
     fun connectionManager(): ConnectionManager
-    fun inject(target: DaggerUtilsApplication)
+    fun inject(target: DaggerUtilsApplication)//инъекция для определенного класса
 }
